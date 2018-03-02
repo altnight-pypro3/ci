@@ -5,4 +5,10 @@ jobs:
       - image: circleci/python:3.5
     steps:
       - checkout
-      - run: python test_foo.py
+      - run: |
+          python3 -m venv venv
+          . ./venv/bin/activate
+          pip install pytest
+          pytest test_foo.py --junit-xml=test-results/pytest.xml
+      - store_test_results:
+          path: test-results
