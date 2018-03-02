@@ -8,7 +8,7 @@ jobs:
       - run: |
           python3 -m venv venv
           . ./venv/bin/activate
-          pip install pytest
-          pytest test_foo.py --junit-xml=test-results/pytest.xml
-      - store_test_results:
-          path: test-results
+          pip install django==1.11.7
+          cd cafe/apps
+          python manage.py migrate
+          python manage.py test
