@@ -1,6 +1,7 @@
 version: 2
 jobs:
-  build:
+
+  lint:
     docker:
       - image: circleci/python:3.5
     steps:
@@ -8,7 +9,27 @@ jobs:
       - run: |
           python3 -m venv venv
           . ./venv/bin/activate
-          pip install sphinx
-          make html
-      - store_artifacts:
-          path: _build/html
+          pip install flake8
+          flake8 test_foo.py
+  test:
+    docker:
+      - image: circleci/python:3.5
+    steps:
+      - checkout
+      - run: |
+          python3 -m venv venv
+          . ./venv/bin/activate
+          pip install pytest
+          pytest test_foo.py
+
+workflows:
+  version: 2
+  myworkflow:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only: master
+      - test:
+          requires:
+            - lint
