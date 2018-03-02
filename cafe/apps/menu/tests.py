@@ -26,7 +26,7 @@ class TeaSearchFormTest(unittest.TestCase):
         """正常な入力をしたときにエラーにならないことを検証する。 """
         params = dict(name="foo", kind=["english"])
         form = TeaSearchForm(params)
-        self.assertEqual(form.is_valid(), False, form.errors.as_text())
+        self.assertEqual(form.is_valid(), True, form.errors.as_text())
 
     def test_either1(self):
         """名称と種類のどちらも入力しないとエラーになることを検証する。 """
