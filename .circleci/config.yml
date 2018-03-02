@@ -8,8 +8,7 @@ jobs:
       - run: |
           python3 -m venv venv
           . ./venv/bin/activate
-          pip install django==1.11.7
-          cd cafe/apps
-          python manage.py migrate
-          python manage.py test
-
+          pip install sphinx
+          make html
+      - store_artifacts:
+          path: _build/html
