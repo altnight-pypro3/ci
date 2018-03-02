@@ -12,3 +12,4 @@ jobs:
           cd cafe/apps
           python manage.py migrate
           python manage.py test
+
